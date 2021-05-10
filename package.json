@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "start-dev": "nodemon server.js",
-    "clear": "python clearOldBackup.py --path='./'"
+    "clean": "python cleanOldBackup.py --path='./'"
   },
   "author": "",
   "license": "ISC",

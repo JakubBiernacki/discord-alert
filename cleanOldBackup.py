@@ -5,7 +5,7 @@ import shutil
 import requests
 
 url = 'http://localhost:5000/send'
-free_size_alert = 10  # GB
+low_space_alert = 10  # GB
 max_day = 8
 
 parser = argparse.ArgumentParser(description="add path")
@@ -31,17 +31,17 @@ for one_dir in dirs:
 
 total, used, free = shutil.disk_usage(path)
 
-if (free / (2 ** 30)) <= free_size_alert:
+if (free / (2 ** 30)) <= low_space_alert:
     data = {
         'username': 'DeleteOldBackup',
         'message': f''':exclamation:Alert: Na dysku kończy sie miejsce:exclamation: 
 
-      :warning: Free size alert: {free_size_alert} GiB
+      :warning: Low Disk Space Alert: {low_space_alert} GiB
       
       :floppy_disk: Disk info:  
-                  Total: {(total // (2 ** 30))} GiB
-                  Used: {(used // (2 ** 30))} GiB
-                  Free: {(free // (2 ** 30))} GiB'''
+                  Total:     {(total // (2 ** 30))} GiB
+                  Used:     {(used // (2 ** 30))} GiB
+                  Free:       {(free // (2 ** 30))} GiB'''
     }
 
     requests.post(url, json=data)
