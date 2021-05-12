@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors'
 import 'dotenv/config';
 
+import { notFound, catchErrors } from "./middlewares/errors.js";
+
 import { sendRouter } from './routers/sendRoute.js'
 import { infoRouter } from './routers/infoRoute.js'
 
@@ -15,8 +17,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/send', sendRouter)
 app.use('/info', infoRouter)
 
-app.use('*', (req, res) => {
-  res.status(404).json({ error: 'not found' })
-})
+
+app.use(notFound)
+app.use(catchErrors)
 
 export default app
